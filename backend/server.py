@@ -202,7 +202,7 @@ async def get_buyer_purchases(buyer_id: str):
         transactions = await db.transactions.find({
             "to_user_id": buyer_id,
             "transaction_type": "transfer"
-        }).to_list(1000)
+        }, {"_id": 0}).to_list(1000)
         
         return {
             "success": True,
