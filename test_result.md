@@ -119,6 +119,9 @@ backend:
         - working: true
         - agent: "testing"
         - comment: "✅ Authentication system working correctly. Successfully tested login for producer, buyer, and regulator roles. User creation and re-login functionality verified. MongoDB connection established."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ Updated authentication system tested thoroughly. All scenarios from review request validated: valid logins for producer/buyer/regulator, invalid credential handling, user creation/re-login, and backend validation. Note: Backend doesn't handle password validation (frontend-only), but username-role matching works correctly. Fixed backend_test.py to use correct usernames."
 
   - task: "Credits Management API"
     implemented: true
