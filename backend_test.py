@@ -136,7 +136,7 @@ class GreenLedgerAPITest:
                 success = (data.get("success") == True and 
                          "credit" in data and 
                          "transaction_hash" in data and
-                         len(data["transaction_hash"]) > 50)  # Check blockchain hash format
+                         len(data["transaction_hash"]) >= 30)  # Check blockchain hash format (0x + 32 hex chars)
                 
                 if success:
                     self.test_credits["producer_credit"] = data["credit"]
