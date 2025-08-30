@@ -141,7 +141,7 @@ class GreenLedgerAPITest:
                     self.test_credits["producer_credit"] = data["credit"]
             
             self.log_test("Mint credit", success,
-                         f"Status: {response.status_code}, Hash: {data.get('transaction_hash', 'N/A')[:20]}... if success else 'Failed'")
+                         f"Status: {response.status_code}, Hash: {data.get('transaction_hash', 'N/A')[:20]}..." if success else "Failed")
                          
         except Exception as e:
             self.log_test("Mint credit", False, str(e))
