@@ -173,7 +173,7 @@ async def purchase_credit(request: TransferRequest):
         )
         
         # Get credit details
-        credit = await db.credits.find_one({"id": request.credit_id})
+        credit = await db.credits.find_one({"id": request.credit_id}, {"_id": 0})
         
         # Create transaction record
         transaction = Transaction(
