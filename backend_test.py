@@ -68,7 +68,8 @@ class GreenLedgerAPITest:
         roles = ["producer", "buyer", "regulator"]
         
         for role in roles:
-            username = f"test_{role}_{uuid.uuid4().hex[:8]}"
+            # Username must match role exactly for the updated authentication system
+            username = role
             
             try:
                 # Test login/user creation
