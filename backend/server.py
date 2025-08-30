@@ -71,8 +71,17 @@ class TransferRequest(BaseModel):
 @api_router.post("/auth/login")
 async def login(request: LoginRequest):
     try:
+        # Validate role
+        valid_roles = ['producer', 'buyer', 'regulator']
+        if request.role not in valid_roles:
+            raise HTTPException(status_code=400, detail="Invalid role")
+        
+        # Validate username matches role for demo
+        if request.username.lower() != request.role.lower():
+            raise HTTPException(status_code=400, detail="Username must match role for demo")
+        
         # Check if user exists
-        existing_user = await db.users.find_one({"username": request.username})
+        existing_user = await db.users.find_one({"username": request.username}, {"_id": 0})
         
         if existing_user:
             user = User(**existing_user)
@@ -86,6 +95,8 @@ async def login(request: LoginRequest):
             "user": user.dict(),
             "message": "Login successful"
         }
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Login failed: {str(e)}")
 
