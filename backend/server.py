@@ -133,7 +133,7 @@ async def mint_credit(request: ProductionRequest, producer_id: str):
 @api_router.get("/producer/{producer_id}/credits")
 async def get_producer_credits(producer_id: str):
     try:
-        credits = await db.credits.find({"owner_id": producer_id}).to_list(1000)
+        credits = await db.credits.find({"owner_id": producer_id}, {"_id": 0}).to_list(1000)
         return {
             "success": True,
             "credits": credits
