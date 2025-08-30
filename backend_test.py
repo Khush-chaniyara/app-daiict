@@ -210,14 +210,15 @@ class GreenLedgerAPITest:
                                            json=purchase_data)
                 
                 success = response.status_code == 200
+                data = {}
                 if success:
                     data = response.json()
                     success = (data.get("success") == True and 
                              "transaction" in data and 
                              "transaction_hash" in data)
                 
-                self.log_test("Purchase credit", success,
-                             f"Status: {response.status_code}, Hash: {data.get('transaction_hash', 'N/A')[:20]}... if success else 'Failed'")
+                details = f"Status: {response.status_code}, Hash: {data.get('transaction_hash', 'N/A')[:20]}..." if success else f"Status: {response.status_code}"
+                self.log_test("Purchase credit", success, details)
                              
             except Exception as e:
                 self.log_test("Purchase credit", False, str(e))
