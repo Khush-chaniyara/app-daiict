@@ -146,11 +146,11 @@ async def get_producer_credits(producer_id: str):
 async def get_available_credits():
     try:
         # Get all credits that are not retired and not owned by the buyer
-        credits = await db.credits.find({"is_retired": False}).to_list(1000)
+        credits = await db.credits.find({"is_retired": False}, {"_id": 0}).to_list(1000)
         
         # Add producer information
         for credit in credits:
-            producer = await db.users.find_one({"id": credit["producer_id"]})
+            producer = await db.users.find_one({"id": credit["producer_id"]}, {"_id": 0})
             credit["producer_name"] = producer["username"] if producer else "Unknown"
         
         return {
