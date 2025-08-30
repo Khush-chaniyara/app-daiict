@@ -215,12 +215,12 @@ async def get_buyer_purchases(buyer_id: str):
 @api_router.get("/regulator/transactions")
 async def get_all_transactions():
     try:
-        transactions = await db.transactions.find({}).to_list(1000)
+        transactions = await db.transactions.find({}, {"_id": 0}).to_list(1000)
         
         # Add user information
         for transaction in transactions:
-            from_user = await db.users.find_one({"id": transaction["from_user_id"]})
-            to_user = await db.users.find_one({"id": transaction["to_user_id"]})
+            from_user = await db.users.find_one({"id": transaction["from_user_id"]}, {"_id": 0})
+            to_user = await db.users.find_one({"id": transaction["to_user_id"]}, {"_id": 0})
             
             transaction["from_user_name"] = from_user["username"] if from_user else "System"
             transaction["to_user_name"] = to_user["username"] if to_user else "Unknown"
