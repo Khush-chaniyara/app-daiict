@@ -107,39 +107,48 @@ user_problem_statement: "Create mobile app like green-ledger-dash website functi
 backend:
   - task: "User Authentication API"
     implemented: true
-    working: false  
+    working: true  
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: false
         - agent: "main"
         - comment: "Implemented login endpoint with role-based access. Needs testing to verify MongoDB connection and user creation."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ Authentication system working correctly. Successfully tested login for producer, buyer, and regulator roles. User creation and re-login functionality verified. MongoDB connection established."
 
   - task: "Credits Management API"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/server.py" 
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: false
         - agent: "main"
         - comment: "Implemented producer credit minting, buyer purchasing, and regulator monitoring endpoints. Mock blockchain hash generation included."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ Credits management working correctly. Producer can mint credits with blockchain hashes, buyers can view available credits and purchase them, credit ownership transfers work properly. Fixed MongoDB ObjectId serialization issues."
 
   - task: "Transaction Tracking API"
     implemented: true
-    working: false
+    working: true
     file: "/app/backend/server.py"
     stuck_count: 0
     priority: "high" 
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: false
         - agent: "main"
         - comment: "Implemented transaction logging for all credit operations (mint, transfer, retire). Ready for testing."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ Transaction tracking working correctly. All transactions (mint, transfer) are properly logged with blockchain hashes. Regulator can view all transactions with user information. Purchase history tracking functional."
 
 frontend:
   - task: "Role-based Authentication UI"
